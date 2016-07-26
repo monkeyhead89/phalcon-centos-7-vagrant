@@ -10,8 +10,7 @@ Vagrant.configure("2") do |config|
   # Read YAML file with box details
   configParams = YAML.load_file('config.yml')
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
+  # Every Vagrant development environment requires a box. 
   config.vm.box = configParams["general"]["name"]
 
   # Check for box update
