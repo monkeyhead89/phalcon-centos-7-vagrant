@@ -1,0 +1,21 @@
+general:
+  update: "false"
+  name: "bento/centos-7.2"
+
+provider:
+  type: "virtualbox"
+  gui: "true"
+  ram: "2024"
+
+network:
+  networkType: "private_network"
+  ip: "192.168.56.145"
+
+#Array of sharedFolders
+sharedFolders:
+  - source: "./TheProvisoner"
+    dest: "/Provisionator"
+
+  # - source: "./TheProvisoner2"
+  #   dest: "/Provisionator2"
+
