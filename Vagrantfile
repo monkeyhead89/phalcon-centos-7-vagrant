@@ -6,8 +6,11 @@ Vagrant.configure("2") do |config|
 
   # Require YAML module
   require 'yaml'
- 
-  # Read YAML file with box details
+
+  # needed this for git clone
+  config.ssh.forward_agent = true
+
+  # Read config.yml
   configParams = YAML.load_file('config.yml')
 
   # Every Vagrant development environment requires a box. 
@@ -17,7 +20,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = configParams["general"]["update"]
 
   # Create a private network, which allows host-only access to the machine using a specific IP.
-  config.vm.network configParams["network"]["networkType"], ip: configParams["network"]["ip"]
+  config.vm.network configParams["network"]["networkType"],bridge: configParams["network"]["bridgedAdapter"],ip: configParams["network"]["ip"]
 
   # Share any additional folder to the guest VM. 
   configParams["sharedFolders"].each do |sharedFolder|
@@ -42,7 +45,7 @@ Vagrant.configure("2") do |config|
         yum install ansible -y
     fi
 
-    ansible-playbook #{configParams['sharedFolders'][0]['dest']}/first.yml
+    ansible-playbook --private-key=.vagrant/machines/default/virtualbox/private_key -u vagrant #{configParams['sharedFolders'][0]['dest']}/main.yml
     "
 
 

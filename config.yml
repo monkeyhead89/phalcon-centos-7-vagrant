@@ -4,12 +4,13 @@ general:
 
 provider:
   type: "virtualbox"
-  gui: "true"
+  gui: false
   ram: "2024"
 
 network:
-  networkType: "private_network"
-  ip: "192.168.56.145"
+  networkType: "public_network"
+  bridgedAdapter: "en0: Wi-Fi (AirPort)"
+  ip: "192.168.0.145"
 
 #Array of sharedFolders
 sharedFolders:

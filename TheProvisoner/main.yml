@@ -1,5 +1,6 @@
 - hosts:
     - localhost
-  tasks:
-    - name: Try a ping mate
-      action: ping
+  roles:
+     - apache
+     - php
+     - phalcon

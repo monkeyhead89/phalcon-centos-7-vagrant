@@ -1,0 +1,36 @@
+---
+
+- name: Set httpd service to stopped
+  service: name=httpd state=stopped
+
+- name: Install required packages
+  yum: name={{item}} state=installed
+  with_items:
+       - pcre-devel
+       - gcc
+       - make
+       - git-core
+
+- stat: path=/usr/lib64/php/modules/phalcon.so
+  register: phalconso  
+
+- git: repo=git://github.com/phalcon/cphalcon.git
+       dest=/opt/phalcon
+       accept_hostkey=yes
+  when: not phalconso.stat.exists
+
+- name: Go to the folder and execute build
+  command: ./install chdir=/opt/phalcon/build
+  register: phalcon_build_output
+  when: not phalconso.stat.exists
+
+- name: Show phalcon_build_output
+  debug: msg="{{ phalcon_build_output.stdout_lines }}"
+  when: not phalconso.stat.exists
+
+- name: Copy phalcon.ini
+  copy: src=files/phalcon.ini dest=/etc/php.d/phalcon.ini
+  when: not phalconso.stat.exists
+
+- name: Set httpd service to running
+  service: name=httpd state=started

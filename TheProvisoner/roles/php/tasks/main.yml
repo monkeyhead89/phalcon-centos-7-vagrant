@@ -1,0 +1,31 @@
+---
+- name: Set httpd service to stopped
+  service: name=httpd state=stopped
+
+- name: Install php packages
+  yum: name={{item}} state=installed
+  with_items:
+       - php
+       - php-mbstring 
+       - php-gd
+       - php-bcmath
+       - php-mcrypt
+       - php-tidy
+       - php-xml
+       - php-xmlrpc
+       - php-soap
+       - php-mysql
+       - php-pdo
+       - php-devel
+
+- ini_file: dest=/etc/php.ini
+            section=PHP
+            option=display_errors
+            value=on
+            backup=yes
+
+- name: Add php info file
+  copy: src=files/phpinfo.php dest=/var/www/html/phpinfo.php
+
+- name: Set httpd service to running
+  service: name=httpd state=started
