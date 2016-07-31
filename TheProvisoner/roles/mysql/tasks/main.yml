@@ -1,0 +1,17 @@
+---
+- name: Install mysql Repo
+  yum:
+    name: http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+    state: installed
+
+- name: Install mysql packages
+  yum: name={{item}} state=installed
+  with_items:
+       - mysql
+       - mysql-server
+       - MySQL-python
+
+- name: Ensure MySQL is started and enabled on boot.
+  service: "name=mysqld state=started enabled=yes"
+
+

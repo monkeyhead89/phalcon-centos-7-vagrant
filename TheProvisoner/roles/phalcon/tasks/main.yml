@@ -3,13 +3,6 @@
 - name: Set httpd service to stopped
   service: name=httpd state=stopped
 
-- name: Install required packages
-  yum: name={{item}} state=installed
-  with_items:
-       - pcre-devel
-       - gcc
-       - make
-       - git-core
 
 - stat: path=/usr/lib64/php/modules/phalcon.so
   register: phalconso  

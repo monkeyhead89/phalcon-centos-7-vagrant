@@ -17,6 +17,8 @@ sharedFolders:
   - source: "./TheProvisoner"
     dest: "/Provisionator"
 
+  - source: "./www"
+    dest: "/var/www/html"
   # - source: "./TheProvisoner2"
   #   dest: "/Provisionator2"
 

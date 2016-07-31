@@ -5,4 +5,4 @@
     state: installed
 
 - name: Set httpd service to running
-  service: name=httpd state=started
+  service: name=httpd state=started enabled=yes

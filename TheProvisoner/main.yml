@@ -1,6 +1,9 @@
 - hosts:
     - localhost
+
   roles:
+     - init
      - apache
      - php
+     - mysql
      - phalcon

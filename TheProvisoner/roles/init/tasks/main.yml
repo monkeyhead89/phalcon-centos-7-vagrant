@@ -1,0 +1,9 @@
+---
+- name: Install required packages
+  yum: name={{item}} state=installed
+  with_items:
+       - nano
+       - pcre-devel
+       - gcc
+       - make
+       - git-core

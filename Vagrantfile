@@ -37,8 +37,8 @@ Vagrant.configure("2") do |config|
 
   # Enable provisioning with a shell script.
   config.vm.provision "shell", inline: 
-   "yum update -y
-    yum install -y epel-release
+   #{}"yum update -y
+    "yum install -y epel-release
 
     if [ ! -f /usr/bin/ansible ]
         then
